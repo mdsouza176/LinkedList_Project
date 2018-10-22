@@ -20,6 +20,8 @@ public:
 	//and returns a list with the digits of the number stored in individual
 	//nodes of the returned list.
 	ListNode* addTwoListNums(ListNode* l1, ListNode* l2);
+	//adds value as a node to the back of the list.
+	bool add(int value);
 private:
 	//points to the front of the list.
 	ListNode *headptr;
