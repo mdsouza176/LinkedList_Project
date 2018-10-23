@@ -5,19 +5,16 @@
 
 // Last edited: Oct 20, 2018
 
-//default construc, does nothing.
+//default construc, sets headptr to null.
 LinkedList::LinkedList()
 {
+	headptr = nullptr;
 }
 
 //destroys all nodes in the list, iteratively
 LinkedList::~LinkedList()
 {
-	while (headptr != nullptr) {
-		ListNode* temp = headptr;
-		headptr = headptr->next;
-		delete temp;
-	}
+	this->clear();
 }
 // one param construc, creates newNode 
 // at the headptr and assigns the parameters
@@ -64,6 +61,9 @@ ListNode * LinkedList::addTwoListNums(ListNode * l1, ListNode * l2)
 	return root;
 }
 
+// adds node to the very back of the tree
+// by traversing to the next nullptr
+// and adding a node with the value there.
 bool LinkedList::add(int value)
 {
 	if (headptr == nullptr) {
@@ -80,8 +80,8 @@ bool LinkedList::add(int value)
 
 // constraints: unable to use any method except
 // access data value at node, and access subsequent nodes.
-//precond: Valid list and non-negative int k.
-//poscond: return same list which has the elements
+// precond: Valid list and non-negative int k.
+// poscond: return same list which has the elements
 // rotated k times.
 ListNode * LinkedList::rotate(ListNode * l1, int k)
 {
@@ -108,7 +108,9 @@ ListNode * LinkedList::rotate(ListNode * l1, int k)
 	headptr->next = nullptr;
 	return newHeadptr;
 }
-
+// traverses the list and
+// returns how many nodes there
+// are based on a count var.
 int LinkedList::getSize()
 {
 	if (headptr == nullptr) {
@@ -121,4 +123,35 @@ int LinkedList::getSize()
 		nodeSum++;
 	}
 	return nodeSum;
+}
+// tries to find noe !---- Not complete yet.
+
+bool LinkedList::remove(int value)
+{
+	if (headptr->data == value) {
+		ListNode *temp = headptr->next;
+		delete headptr;
+		headptr = temp;
+		return true;
+	}
+	ListNode * n = headptr->next;
+	while (n != nullptr) {
+		if (n->data == value) {
+			ListNode * temp = n->next;
+			delete n;
+			n = temp;
+			return true;
+		}
+		n = n->next;
+	}
+	return false;
+}
+
+void LinkedList::clear()
+{
+	while (headptr != nullptr) {
+		ListNode* temp = headptr;
+		headptr = headptr->next;
+		delete temp;
+	}
 }
