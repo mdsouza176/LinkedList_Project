@@ -26,6 +26,11 @@ public:
 	ListNode* rotate(ListNode * l1, int k);
 	//returns the size of the list
 	int getSize();
+	//deletes node within list if exists and returns true
+	// if removed, or false if the node does not exist.
+	bool remove(int value);
+	//deletes all nodes in list.
+	void clear();
 private:
 	//points to the front of the list.
 	ListNode *headptr;
