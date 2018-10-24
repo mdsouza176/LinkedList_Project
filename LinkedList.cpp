@@ -124,7 +124,6 @@ int LinkedList::getSize()
 	}
 	return nodeSum;
 }
-// tries to find noe !---- Not complete yet.
 
 bool LinkedList::remove(int value)
 {
@@ -134,19 +133,18 @@ bool LinkedList::remove(int value)
 		headptr = temp;
 		return true;
 	}
-	ListNode * n = headptr->next;
-	while (n != nullptr) {
-		if (n->data == value) {
-			ListNode * temp = n->next;
-			delete n;
-			n = temp;
-			return true;
+	ListNode * n = headptr; //traversing list temp.
+	while(n->next != nullptr) { //traverse till end
+		if (n->next->data == value) {  //checks if next value is what we need to find.
+			ListNode * temp1 = n->next; //creates temp to hold deletion node.
+			n->next = n->next->next; // sets previous node to point to the next->next node.
+			delete temp1; // delete the node currently at.
+			return true; // return true.
 		}
-		n = n->next;
 	}
-	return false;
+	return false; // if can't find node, return false.
 }
-
+// deletes all nodes in list iteratively.
 void LinkedList::clear()
 {
 	while (headptr != nullptr) {
